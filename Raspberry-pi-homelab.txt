@@ -30,6 +30,8 @@ Goals
 
 Hardware
 --------
+- Raspberry pi with the M.2 hat for NVMe storage 
+- OPTIONAL: Metal M.2 custom case for pi protection
 - OS disk: microSD card (Raspberry Pi OS Lite)
 - Data disk: 2 TB NVMe on an M.2 HAT (metal case + cooling)
 - Data disk: 8 TB external drive
