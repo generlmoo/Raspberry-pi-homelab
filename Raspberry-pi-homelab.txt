@@ -6,19 +6,19 @@ Raspberry Pi Homelab (Pi-hole + OMV/NAS + Jellyfin + Filebrowser)
                       │
                (Cloudflare Tunnel)
                       │
-                generlmoo.me
+                Example.com
       ┌───────────────┼─────────────────┐
-  files.generlmoo.me  │      watch.generlmoo.me
+  files.example.com   │      watch.example.com
   (FileBrowser)       │      (Jellyfin)
                       │
-            nas.generlmoo.me
+            nas.example.com
             (OpenMediaVault admin)
                       |
                       │
                  Raspberry Pi 5
      ┌────────────────┴────────────────┐
      │                                 │
-  2 TB NVMe (OS + media)          8 TB USB HDD (bulk media)
+2 TB NVMe (OS + media)          8 TB USB SSD (bulk media)
 
 Goals
 -----
