@@ -15,7 +15,7 @@ Raspberry Pi Homelab (Pi-hole + OMV/NAS + Jellyfin + Filebrowser)
             (OpenMediaVault admin)
                       |
                       │
-                 Raspberry Pi 5
+                 Raspberry Pi 5 (Pi OS Lite on 256 GB MicroSD)
      ┌────────────────┴────────────────┐
      │                                 │
 2 TB NVMe (OS + media)          8 TB USB SSD (bulk media)
