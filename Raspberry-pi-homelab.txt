@@ -8,10 +8,10 @@ Raspberry Pi Homelab (Pi-hole + OMV/NAS + Jellyfin + Filebrowser)
                       │
                 Example.com
       ┌───────────────┼─────────────────┐
-  files.example.com   │      watch.example.com
+  files.Example.com   │      watch.Example.com
   (FileBrowser)       │      (Jellyfin)
                       │
-            nas.example.com
+            nas.Example.com
             (OpenMediaVault admin)
                       |
                       │
