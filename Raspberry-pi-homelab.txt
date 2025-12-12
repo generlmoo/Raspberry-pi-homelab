@@ -1,0 +1,80 @@
+Raspberry Pi Homelab (Pi-hole + NAS)
+====================================
+
+Purpose
+-------
+Central place to document my Raspberry Pi homelab: Pi-hole (DNS ad-blocking) and a small NAS / file share.
+
+If you're reading this on GitHub, start with README.md.
+
+
+Hardware
+--------
+- Raspberry Pi model:
+- Storage (SD/SSD/HDD, size):
+- Case/cooling:
+- Power supply:
+- Network (Ethernet/Wi‑Fi, switch/router):
+
+
+Software
+--------
+- OS (Raspberry Pi OS / Ubuntu / etc):
+- Pi-hole:
+- NAS stack (Samba / NFS / OpenMediaVault / Docker, etc):
+- Optional: Unbound (recursive DNS), WireGuard, Tailscale, etc.
+
+
+Network Details
+---------------
+- Pi IP address:
+- Router/DHCP: (who hands out IPs)
+- DNS settings: (router points to Pi-hole, fallback DNS, etc.)
+- Hostname(s):
+
+
+Services
+--------
+Pi-hole
+- Admin UI: http://<pi-ip>/admin
+- Upstream DNS:
+- Blocklists:
+- Allowlist/denylist notes:
+
+NAS / Shares
+- Share paths:
+- Protocols (SMB/NFS):
+- Users/groups:
+- Permissions:
+
+
+Install (High Level)
+--------------------
+1) Flash OS and boot the Pi
+2) Set a static IP / DHCP reservation
+3) Install Pi-hole
+4) Point router DNS to Pi-hole
+5) Set up file sharing / NAS service
+6) Set up updates + backups
+
+
+Maintenance
+-----------
+- Updating OS:
+- Updating Pi-hole:
+- Log rotation / disk usage checks:
+- Backup strategy (what, where, how often):
+
+
+Troubleshooting
+---------------
+- If ads are not blocked:
+- If clients bypass Pi-hole:
+- If shares are inaccessible:
+
+
+TODO (fill these in)
+--------------------
+- Add exact commands used for install/config.
+- Add a diagram of network topology.
+- Add backup/restore steps.
