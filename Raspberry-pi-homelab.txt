@@ -1,80 +1,75 @@
-Raspberry Pi Homelab (Pi-hole + NAS)
-====================================
+Raspberry Pi Homelab (Pi-hole + OMV/NAS + Jellyfin + Filebrowser)
+=================================================================
 
-Purpose
--------
-Central place to document my Raspberry Pi homelab: Pi-hole (DNS ad-blocking) and a small NAS / file share.
-
-If you're reading this on GitHub, start with README.md.
+Goals
+-----
+- Keep the base OS minimal and stable (Raspberry Pi OS Lite).
+- Use NVMe + external storage for data.
+- Make services play nicely together (no port conflicts).
+- Secure remote access (Cloudflare Tunnel for apps, Tailscale for break-glass admin).
 
 
 Hardware
 --------
-- Raspberry Pi model:
-- Storage (SD/SSD/HDD, size):
-- Case/cooling:
-- Power supply:
-- Network (Ethernet/Wi‑Fi, switch/router):
+- OS disk: microSD card (Raspberry Pi OS Lite)
+- Data disk: 2 TB NVMe on an M.2 HAT (metal case + cooling)
+- Data disk: 8 TB external drive
 
-
-Software
---------
-- OS (Raspberry Pi OS / Ubuntu / etc):
-- Pi-hole:
-- NAS stack (Samba / NFS / OpenMediaVault / Docker, etc):
-- Optional: Unbound (recursive DNS), WireGuard, Tailscale, etc.
-
-
-Network Details
+Important notes
 ---------------
-- Pi IP address:
-- Router/DHCP: (who hands out IPs)
-- DNS settings: (router points to Pi-hole, fallback DNS, etc.)
-- Hostname(s):
+- Raspberry Pi OS Lite must be installed to the microSD (do not put the OS image on the NVMe).
+- Filebrowser should keep its config/database on the OS disk (microSD). Only point it at mounted data directories.
+- Partitioning/formatting can be dangerous if you pick the wrong device; double-check with `lsblk` before running any disk commands.
 
 
-Services
---------
-Pi-hole
-- Admin UI: http://<pi-ip>/admin
-- Upstream DNS:
-- Blocklists:
-- Allowlist/denylist notes:
-
-NAS / Shares
-- Share paths:
-- Protocols (SMB/NFS):
-- Users/groups:
-- Permissions:
+Software / Services
+-------------------
+- OS: Raspberry Pi OS Lite (command-line based, minimal overhead)
+- Pi-hole: DNS + ad blocking (optionally using Cloudflare upstream DNS)
+- OpenMediaVault (OMV): manage disks/shares/services
+- Filebrowser: web UI for browsing files
+- Jellyfin: media server
+- Cloudflare: domain + tunnels (no open inbound ports)
+- Tailscale: secure remote access (SSH/admin if something breaks)
 
 
-Install (High Level)
---------------------
-1) Flash OS and boot the Pi
-2) Set a static IP / DHCP reservation
-3) Install Pi-hole
-4) Point router DNS to Pi-hole
-5) Set up file sharing / NAS service
-6) Set up updates + backups
+How these work together
+-----------------------
+Storage
+- NVMe (2TB) + external (8TB) are mounted to directories (example: `/mnt/nvme2tb`, `/mnt/usb8tb`).
+- OMV shares point at those mount points.
+- Jellyfin libraries point at those mount points.
+- Filebrowser is configured to browse those mount points, but stores its own config on the OS disk.
+
+Networking / ports (avoid conflicts)
+- Pi-hole uses DNS ports (53/tcp+udp) and has a web UI.
+- OMV also has a web UI.
+- Jellyfin typically uses `8096`.
+- Filebrowser typically uses `8080`.
+
+If two services want the same port (commonly port 80), change one of them so each has its own port.
 
 
-Maintenance
------------
-- Updating OS:
-- Updating Pi-hole:
-- Log rotation / disk usage checks:
-- Backup strategy (what, where, how often):
+Cloudflare (domain + tunnels)
+-----------------------------
+- Buy a domain and add it to Cloudflare.
+- Create Cloudflare Tunnels so services can be accessed without port-forwarding.
+- Use different subdomains per service (examples):
+  - `jellyfin.<your-domain>` -> `http://localhost:8096`
+  - `files.<your-domain>` -> `http://localhost:8080`
+- Strongly consider protecting any admin UIs with Cloudflare Access (especially Pi-hole / OMV).
 
 
-Troubleshooting
----------------
-- If ads are not blocked:
-- If clients bypass Pi-hole:
-- If shares are inaccessible:
+Tailscale (break-glass access)
+------------------------------
+- Use Tailscale for secure remote SSH/admin access from anywhere.
+- This is the "if something goes wrong" path when the tunnel/app path isn't working.
 
 
-TODO (fill these in)
---------------------
-- Add exact commands used for install/config.
-- Add a diagram of network topology.
-- Add backup/restore steps.
+Commands / Step-by-step
+-----------------------
+See `docs/SETUP.md` for:
+- Mounting the 2TB NVMe and the 8TB drive (with example commands)
+- Installing OMV, Pi-hole, Filebrowser, and Jellyfin
+- Cloudflare Tunnel and Tailscale setup notes
+

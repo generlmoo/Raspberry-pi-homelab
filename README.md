@@ -1,19 +1,19 @@
 # PiHoleNAS (Raspberry Pi Homelab)
 
 Notes and setup guide for my Raspberry Pi homelab, focused on:
-- **Pi-hole** (local DNS + ad-blocking)
-- **NAS / file sharing** (SMB/NFS/other)
+- Pi-hole (local DNS + ad-blocking)
+- NAS / file sharing (via OMV + mounted disks)
+- Jellyfin (media)
+- Filebrowser (web file manager)
+- Remote access (Cloudflare Tunnel + Tailscale)
 
-## What’s in here
-- `Raspberry-pi-homelab.txt` — working notes + checklist (source of truth)
+## What's in here
+- `Raspberry-pi-homelab.txt` - overview + decisions + checklist
+- `docs/SETUP.md` - step-by-step setup with example commands
 
 ## Quick links (fill in)
 - Pi-hole admin: `http://<pi-ip>/admin`
-- Pi hostname: `<hostname>`
-- Static IP / DHCP reservation: `<ip>`
-
-## TODO
-- Replace placeholders with your actual hardware/software details.
-- Add exact install/config commands you used.
-- Add backup/restore steps.
+- OMV: `http://<pi-ip>/`
+- Jellyfin: `http://<pi-ip>:8096`
+- Filebrowser: `http://<pi-ip>:8080`
 
