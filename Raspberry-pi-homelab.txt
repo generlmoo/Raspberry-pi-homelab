@@ -1,6 +1,25 @@
 Raspberry Pi Homelab (Pi-hole + OMV/NAS + Jellyfin + Filebrowser)
 =================================================================
 
+
+                   Internet
+                      │
+               (Cloudflare Tunnel)
+                      │
+                generlmoo.me
+      ┌───────────────┼─────────────────┐
+  files.generlmoo.me  │      watch.generlmoo.me
+  (FileBrowser)       │      (Jellyfin)
+                      │
+            nas.generlmoo.me
+            (OpenMediaVault admin)
+                      |
+                      │
+                 Raspberry Pi 5
+     ┌────────────────┴────────────────┐
+     │                                 │
+  2 TB NVMe (OS + media)          8 TB USB HDD (bulk media)
+
 Goals
 -----
 - Keep the base OS minimal and stable (Raspberry Pi OS Lite).
