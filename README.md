@@ -11,6 +11,9 @@ Notes and setup guide for my Raspberry Pi homelab, focused on:
 - `Raspberry-pi-homelab.txt` - overview + decisions + checklist
 - `docs/SETUP.md` - step-by-step setup with example commands
 
+## Homelab portal (resume-friendly)
+- `docs/landing.html` - a dark/neon single-page portal that links to the main services (files/watch/nas/pihole). Host it at `https://generlmoo.me` and point the buttons to your subdomains.
+
 ## Quick links (fill in)
 - Pi-hole admin: `http://<pi-ip>/admin`
 - OMV: `http://<pi-ip>/`

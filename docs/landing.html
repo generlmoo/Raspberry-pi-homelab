@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generlmoo Homelab Portal</title>
+  <style>
+    :root {
+      --bg: #05060a;
+      --panel: rgba(14, 19, 34, 0.8);
+      --glow: #3cf2ff;
+      --muted: #8da9c4;
+      --text: #e7f7ff;
+      --shadow: 0 10px 30px rgba(0, 255, 255, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at 20% 20%, rgba(60, 242, 255, 0.08), transparent 35%),
+                  radial-gradient(circle at 80% 10%, rgba(60, 242, 255, 0.12), transparent 40%),
+                  linear-gradient(135deg, #05060a 0%, #0a0f1f 60%, #05060a 100%);
+      color: var(--text);
+      font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+    }
+
+    .frame {
+      width: min(1100px, 100%);
+      background: linear-gradient(135deg, rgba(60, 242, 255, 0.16), rgba(60, 242, 255, 0.04)) border-box;
+      border: 1px solid rgba(60, 242, 255, 0.35);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 1px;
+    }
+
+    .content {
+      background: var(--panel);
+      border-radius: 16px;
+      padding: 32px;
+      backdrop-filter: blur(12px);
+    }
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+      border-bottom: 1px solid rgba(141, 169, 196, 0.2);
+      padding-bottom: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: radial-gradient(circle at 35% 35%, rgba(60, 242, 255, 0.9), rgba(60, 242, 255, 0.15));
+      box-shadow: 0 0 20px rgba(60, 242, 255, 0.35);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.6rem, 2vw, 2rem);
+      letter-spacing: 0.02em;
+    }
+
+    .tagline {
+      color: var(--muted);
+      margin: 4px 0 0;
+      font-size: 0.98rem;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: rgba(60, 242, 255, 0.12);
+      border: 1px solid rgba(60, 242, 255, 0.4);
+      color: var(--text);
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: inset 0 0 0 1px rgba(60, 242, 255, 0.15);
+      transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease;
+    }
+
+    .cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(60, 242, 255, 0.18);
+      background: rgba(60, 242, 255, 0.18);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(60, 242, 255, 0.25);
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      transition: transform 160ms ease, border-color 160ms ease;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% 20%, rgba(60, 242, 255, 0.18), transparent 45%);
+      opacity: 0;
+      transition: opacity 200ms ease;
+      pointer-events: none;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(60, 242, 255, 0.6);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card h2 {
+      margin: 0 0 4px;
+      font-size: 1.2rem;
+    }
+
+    .card p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(60, 242, 255, 0.15);
+      border: 1px solid rgba(60, 242, 255, 0.3);
+      color: var(--text);
+      font-size: 0.78rem;
+      letter-spacing: 0.02em;
+      margin-bottom: 10px;
+    }
+
+    .card a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: linear-gradient(90deg, rgba(60, 242, 255, 0.2), rgba(60, 242, 255, 0.08));
+      border: 1px solid rgba(60, 242, 255, 0.35);
+      transition: transform 150ms ease, box-shadow 150ms ease;
+    }
+
+    .card a:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(60, 242, 255, 0.2);
+    }
+
+    footer {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <div class="content">
+      <header>
+        <div class="brand">
+          <div class="badge" aria-hidden="true"></div>
+          <div>
+            <h1>Generlmoo Homelab</h1>
+            <p class="tagline">Quick portal to the services running in my Raspberry Pi stack.</p>
+          </div>
+        </div>
+        <a class="cta" href="https://generlmoo.me">generlmoo.me</a>
+      </header>
+
+      <div class="grid">
+        <div class="card">
+          <div class="pill">Media</div>
+          <h2>Watch</h2>
+          <p>Stream shows and movies via Jellyfin with hardware-accelerated playback and curated libraries.</p>
+          <a href="https://watch.generlmoo.me" target="_blank" rel="noreferrer">Open Jellyfin →</a>
+        </div>
+        <div class="card">
+          <div class="pill">Files</div>
+          <h2>File Browser</h2>
+          <p>Browse, upload, and organize files securely with Filebrowser, backed by the NAS volumes.</p>
+          <a href="https://files.generlmoo.me" target="_blank" rel="noreferrer">Open Filebrowser →</a>
+        </div>
+        <div class="card">
+          <div class="pill">Storage</div>
+          <h2>NAS / OMV</h2>
+          <p>Manage disks, shares, and services with OpenMediaVault. Admin-only access via tunnel.</p>
+          <a href="https://nas.generlmoo.me" target="_blank" rel="noreferrer">Open OMV →</a>
+        </div>
+        <div class="card">
+          <div class="pill">Network</div>
+          <h2>Pi-hole</h2>
+          <p>Monitor DNS and ad-blocking performance, client activity, and upstream health.</p>
+          <a href="https://pihole.generlmoo.me" target="_blank" rel="noreferrer">Open Pi-hole →</a>
+        </div>
+      </div>
+
+      <footer>
+        Built for showcase + quick access. Protect admin UIs with Cloudflare Access or SSO in production.
+      </footer>
+    </div>
+  </div>
+</body>
+</html>
